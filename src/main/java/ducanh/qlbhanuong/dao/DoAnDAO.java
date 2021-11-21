@@ -10,26 +10,26 @@ public class DoAnDAO extends DAO{
     public DoAnDAO() {
         super();
     }
-    public ArrayList<DoAn> getDoAn(){
-        ArrayList<DoAn> kq=null;
-        String sql = ""; //su dung stored procedure
-        try{
-            CallableStatement cs = con.prepareCall(sql);
-            ResultSet rs = cs.executeQuery();
-            while(rs.next()){
-                if(kq == null) kq = new ArrayList<>();
-
-                DoAn doAn=new DoAn();
-                doAn.setId(rs.getInt("id"));
-                doAn.setTen(rs.getString("ten"));
-                kq.add(doAn);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-            kq = null;
-        }
-        return kq;
-    }
+//    public ArrayList<DoAn> getDoAn(){
+//        ArrayList<DoAn> kq=null;
+//        String sql = ""; //su dung stored procedure
+//        try{
+//            CallableStatement cs = con.prepareCall(sql);
+//            ResultSet rs = cs.executeQuery();
+//            while(rs.next()){
+//                if(kq == null) kq = new ArrayList<>();
+//
+//                DoAn doAn=new DoAn();
+//                doAn.setId(rs.getInt("id"));
+//                doAn.setTen(rs.getString("ten"));
+//                kq.add(doAn);
+//            }
+//        }catch(Exception e){
+//            e.printStackTrace();
+//            kq = null;
+//        }
+//        return kq;
+//    }
     public ArrayList<DoAn> getDoAnByName(String ten){
         ArrayList<DoAn> kq=null;
         String sql = "SELECT * FROM tbldoan WHERE ten LIKE ?";

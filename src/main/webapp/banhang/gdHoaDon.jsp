@@ -7,14 +7,16 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Chon nganh hoc</title>
+    <title>DANH SÁCH ĐỒ ĂN</title>
+    <%@include file ="../header.jsp" %>
 </head>
 <%
     //lay id sinh vien
-    NhanVien sv = (NhanVien) session.getAttribute("nvbh");
-    if(sv==null){
-        response.sendRedirect("index.jsp?err=timeout");
+    NhanVien nv = (NhanVien) session.getAttribute("nvbh");
+    if(nv==null){
+        response.sendRedirect("../gdDangNhap.jsp?err=timeout");
     }
+
     ArrayList<DoAnDat> listDoAnDat=new ArrayList<>();
 
     if (session.getAttribute("listDoAnDat")!=null)
@@ -30,34 +32,51 @@
         kcID=Integer.parseInt(request.getParameter("kichCo"));
 
         DoAnDat doAnDat=new DoAnDat();
-        doAnDat.setGiaMua(10000);
 
-        KichCoDAO kichCoDAO=new KichCoDAO();
+
+//        KichCoDAO kichCoDAO=new KichCoDAO();
+        KichCoDoAnDAO kichCoDoAnDAO=new KichCoDoAnDAO();
+
+//        day du lieu vao do an dat
         if (session.getAttribute("doAn")!=null){
+            DoAn doAn= (DoAn) session.getAttribute("doAn");
             doAnDat.setDoAn((DoAn) session.getAttribute("doAn"));
             doAnDat.setSoLuong(sl);
-            doAnDat.setKichCo(kichCoDAO.getKichCoByID(kcID));
+            doAnDat.setKichCo(kichCoDoAnDAO.getKichCoDA(doAn.getId(),kcID).getKichCo());
+            doAnDat.setGiaMua(kichCoDoAnDAO.getKichCoDA(doAn.getId(),kcID).getGia());
         }
         listDoAnDat.add(doAnDat);
+
+    }
+    //xoa list do an dat
+    if (request.getParameter("delete")!=null){
+        int vt =Integer.parseInt(request.getParameter("delete"));
+        listDoAnDat.remove(vt);
+        session.setAttribute("listDoAnDat",listDoAnDat);
+        response.sendRedirect("gdHoaDon.jsp");
     }
 
     int tongTien=0-diem;
 %>
 <body>
-<h2> Chọn ngành </h2>
+<h2> DANH SÁCH ĐỒ ĂN ĐÃ CHỌN </h2>
 
-<table style="border: 1px solid black;border-collapse: collapse;">
+<table class="table table-bordered">
     <thead>
-        <td style="border: 1px solid black; padding:0 15px 0 15px;">Ma do an</td>
-        <td style="border: 1px solid black; padding:0 15px 0 15px;">Ten Do An</td>
-        <td style="border: 1px solid black; padding:0 15px 0 15px;">Gia</td>
-        <td style="border: 1px solid black; padding:0 15px 0 15px;">Kich co</td>
-        <td style="border: 1px solid black; padding:0 15px 0 15px;">So Luong</td>
+    <tr>
+        <th >STT</th>
+        <th >Tên</th>
+        <th >Giá</th>
+        <th >Kích cỡ</th>
+        <th >Số lượng</th>
+        <th >Thao tác</th>
+    </tr>
     </thead>
+    <tbody>
     <%
         if(listDoAnDat != null)
             for(int i=0; i<listDoAnDat.size(); i++){
-                tongTien+=listDoAnDat.get(i).getGiaMua();
+                tongTien+=listDoAnDat.get(i).getGiaMua()*listDoAnDat.get(i).getSoLuong();
     %>
     <tr>
         <td style="text-align:center; padding:0 15px 0 15px;"><%=(i+1) %></td>
@@ -65,21 +84,25 @@
         <td style="padding:0 15px 0 15px;"><%=listDoAnDat.get(i).getGiaMua() %></td>
         <td style="padding:0 15px 0 15px;"><%=listDoAnDat.get(i).getKichCo().getTen() %></td>
         <td style="padding:0 15px 0 15px;"><%=listDoAnDat.get(i).getSoLuong() %></td>
-
+        <td style="text-align:center; padding:0 15px 0 15px;">
+            <a class="btn btn-danger" href="gdHoaDon.jsp?delete=<%=i%>">Xóa</a>
+        </td>
     </tr>
     <%} %>
+    </tbody>
 </table>
 
 <%if (diem>0){%>
-    <h3>Diem da doi: -<%=diem%></h3>
+    <h4>Điểm đã đổi: <%=diem%></h4>
 <%}%>
-<h3>Tong tien: <%=tongTien%></h3>
+<h4>Tổng tiền: <%=tongTien%> VND</h4>
 <br>
-<button onclick="document.location='gdChonMonAn.jsp'">Them mon</button>
-<button onclick="document.location='gdChinh.jsp'">Trang chu</button>
-<button onclick="document.location='doLuuHoaDon.jsp'">Thanh toan</button>
-<button onclick="document.location='gdDoiDiem.jsp'">Doi diem</button>
-
+<button class="btn btn-primary" onclick="document.location='gdChonMonAn.jsp'">Thêm đồ ăn</button>
+<button class="btn btn-warning" onclick="document.location='gdChinh.jsp'">Trang chủ</button>
+<%if (listDoAnDat.size()>0){%>
+    <button class="btn btn-success" onclick="document.location='doLuuHoaDon.jsp'">Thanh toán</button>
+    <button class="btn btn-info" onclick="document.location='gdDoiDiem.jsp'">Đổi điểm</button>
+<%}%>
 </form>
 </body>
 </html>

@@ -7,68 +7,71 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Chon nganh hoc</title>
+    <title>CHỌN MÓN ĂN</title>
+    <%@include file ="../header.jsp" %>
 </head>
 <%
 //lay id sinh vien
         NhanVien sv = (NhanVien) session.getAttribute("nvbh");
         if(sv==null){
-            response.sendRedirect("index.jsp?err=timeout");
+            response.sendRedirect("../gdDangNhap.jsp?err=timeout");
         }
+
+        String name = (String)request.getParameter("name");
+        DoAnDAO doAnDAO=new DoAnDAO();
         ArrayList<DoAn> listDoAn=new ArrayList<>();
-        if (session.getAttribute("listTimKiem")!=null)
-            listDoAn = (ArrayList<DoAn>) session.getAttribute("listTimKiem");
-//        else listDoAn = (new DoAnDAO()).getDoAnByName("a");
-//if (listDoAn.isEmpty()) listDoAn=new ArrayList<>();
-//lay danh sach do an
+        listDoAn=doAnDAO.getDoAnByName(name);
 
+        session.setAttribute("listTimKiem",listDoAn);
 
-//session.setAttribute("listSVK", listNganh);
-////lay danh sach ki hoc dang mo dang ki
-//ArrayList<Kihoc> listKi = (new KihocDAO()).getKihocdangki();
 %>
 
 <body>
 
-<h2> Chọn ngành </h2>
-
-<form name="dangnhap" action="doTimKiem.jsp" method="post">
+<h2> CHỌN MÓN ĂN </h2>
+<div class="container">
+<form name="dangnhap" action="gdChonMonAn.jsp" method="post">
     <table border="0">
         <tr>
-            <td>Ten mon an:</td>
+            <td>Tên món ăn:</td>
             <td><input type="text" name="name" id="name" required /></td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Tim kiem" /></td>
+            <td><input type="submit" class="btn btn-success" value="Tìm kiếm" /></td>
         </tr>
     </table>
 </form>
-
+<br>
 <%--    ---------------%>
-
-    <table style="border: 1px solid black;border-collapse: collapse;">
-        <thead><td style="border: 1px solid black; padding:0 15px 0 15px;">Ma mon</td>
-        <td style="border: 1px solid black; padding:0 15px 0 15px;">Ten do an</td>
-        <td style="border: 1px solid black; padding:0 15px 0 15px;">Gia tham khao</td>
-
-        <td style="border: 1px solid black; padding:0 15px 0 15px;">Chọn</td>
+    <%if(listDoAn!=null){%>
+    <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Chọn</th>
+        </tr>
         </thead>
+        <tbody>
         <%
             if(listDoAn != null)
                 for(int i=0; i<listDoAn.size(); i++){
         %>
         <tr>
-            <td style="text-align:center; padding:0 15px 0 15px;"><%=(i+1) %></td>
-            <td style="text-align:center; padding:0 15px 0 15px;"><%=listDoAn.get(i).getTen() %></td>
-            <td style="padding:0 15px 0 15px;"><%=listDoAn.get(i).getTen() %></td>
-            <td style="text-align:center; padding:0 15px 0 15px;">
+            <td ><%=(i+1) %></td>
+            <td ><%=listDoAn.get(i).getTen() %></td>
+            <td >
                 <a href="gdChonKichCoSL.jsp?idDoAn=<%=listDoAn.get(i).getId()%>">Chọn</a>
             </td>
         </tr>
         <%} %>
+        </tbody>
     </table>
-
+<%}%>
+    <br>
+<button type="button" class="btn btn-warning" onclick="document.location='gdChinh.jsp'">Quay lại</button>
 </form>
+</div>
 </body>
 </html>

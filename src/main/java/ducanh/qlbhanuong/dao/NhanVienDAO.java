@@ -5,11 +5,10 @@ import ducanh.qlbhanuong.model.NhanVien;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
-public class ThanhVienDAO extends DAO {
-    public ThanhVienDAO() {
+public class NhanVienDAO extends DAO {
+    public NhanVienDAO() {
         super();
     }
-
     public boolean kiemtraDangnhap(NhanVien tv){
         boolean kq = false;
         if(tv.getUsername().contains("true") ||
@@ -17,7 +16,7 @@ public class ThanhVienDAO extends DAO {
                 tv.getPassword().contains("true") ||
                 tv.getPassword().contains("=")) return false;
 
-        String sql = "select * from tblnhanvien where username = ? and password = ?"; //su dung stored procedure
+        String sql = "select * from tblnhanvien where username = ? and password = ?";
         try{
             CallableStatement cs = con.prepareCall(sql);
             cs.setString(1,tv.getUsername());
@@ -26,8 +25,6 @@ public class ThanhVienDAO extends DAO {
             if(rs.next()){
                 tv.setId(rs.getInt("id"));
                 tv.setVaiTro(rs.getString("vaitro"));
-////hoten
-//                Hoten ht = new Hoten();
                 tv.setTen(rs.getString("ten"));
                 kq = true;
             }

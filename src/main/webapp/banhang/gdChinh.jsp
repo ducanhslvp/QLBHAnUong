@@ -8,18 +8,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <%@include file ="../header.jsp" %>
-    <title>Trang chu quan ly</title>
+    <title>TRANG CHỦ BÁN HÀNG</title>
 </head>
 <body>
 <%
     NhanVien sv = (NhanVien) session.getAttribute("nvbh");
     if(sv==null){
-        response.sendRedirect("index.jsp?err=timeout");
+        response.sendRedirect("gdDangNhap.jsp?err=timeout");
     }
     List<DoAnDat> list=new ArrayList<>();
     session.setAttribute("listDoAnDat", list);
 %>
-<h2> Trang chủ sinh viên </h2>
-<button onclick="document.location='gdChonMonAn.jsp'">Ban hang an uong</button>
+<h2> TRANG CHỦ BÁN HÀNG</h2>
+<button class="btn btn-success" onclick="document.location='gdChonMonAn.jsp'">Bán hàng ăn uống</button>
 </body>
 </html>

@@ -5,11 +5,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%@include file ="../header.jsp" %>
         <%
 //lay id sinh vien
     NhanVien nv = (NhanVien) session.getAttribute("nvbh");
     if(nv==null){
-        response.sendRedirect("index.jsp?err=timeout");
+        response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 }
 //lay thong do an dat
     ArrayList<DoAnDat> list = (ArrayList<DoAnDat>)session.getAttribute("listDoAnDat");
@@ -25,18 +26,19 @@
     }
     DoAnDatDAO doAnDatDAO=new DoAnDatDAO();
 //   luu hoa don va do an dat
-    if(hoaDonDAO.luuHoaDon(hoaDon) && doAnDatDAO.luuDoAnDat(list)){
+    if(hoaDonDAO.luuHoaDon(hoaDon)){
+        if (doAnDatDAO.luuDoAnDat(list)){
 
 %>
     <script type="text/javascript">
-        alert("Thanh toan thanh cong!");
+        alert("Thanh toán thành công!");
     </script>
         <%
     response.sendRedirect("gdChinh.jsp");
-    }else{
+    }}else{
 %>
     <script type="text/javascript">
-        alert("Thanh toan that bai!");
+        alert("Thanh toán thất bại!");
         history.back();
     </script>
         <%}%>

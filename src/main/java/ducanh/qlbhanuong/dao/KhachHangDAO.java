@@ -1,7 +1,6 @@
 package ducanh.qlbhanuong.dao;
 
 import ducanh.qlbhanuong.model.KhachHang;
-import ducanh.qlbhanuong.model.NhanVien;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -11,8 +10,7 @@ public class KhachHangDAO extends DAO{
     }
     public KhachHang getKhachHangByMaTV(String ma){
         KhachHang khachHang=new KhachHang();
-//        khachHang=null;
-        String sql = "select * from tblkhachhang where mathanhvien = ?"; //su dung stored procedure
+        String sql = "select * from tblkhachhang where mathanhvien = ?";
         try{
             CallableStatement cs = con.prepareCall(sql);
             cs.setString(1,ma);

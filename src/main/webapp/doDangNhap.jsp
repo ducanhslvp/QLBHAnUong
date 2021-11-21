@@ -7,16 +7,13 @@
         NhanVien tv = new NhanVien();
     tv.setUsername(username);
     tv.setPassword(password);
-    ThanhVienDAO dao = new ThanhVienDAO();
+    NhanVienDAO dao = new NhanVienDAO();
     boolean kq = dao.kiemtraDangnhap(tv);
     if(kq && (tv.getVaiTro().equalsIgnoreCase("nvbh"))){
         session.setAttribute("nvbh", tv);
         response.sendRedirect("banhang\\gdChinh.jsp");
     }else
-//    else if(kq &&(tv.getVaiTro().equalsIgnoreCase("giangvien"))){
-//        session.setAttribute("giangvien", tv);
-//        response.sendRedirect("gv\\gdchinhgv.jsp");
 
-        response.sendRedirect("index.jsp?err=fail");
+        response.sendRedirect("gdDangNhap.jsp?err=fail");
 
 %>

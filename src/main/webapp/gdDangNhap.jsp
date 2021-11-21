@@ -6,7 +6,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Dang nhap</title>
+    <title>ĐĂNG NHẬP</title>
+    <%@include file ="header.jsp" %>
 </head>
 <body>
 <%
@@ -19,25 +20,21 @@
     }
 %>
 <h2> Đăng nhập </h2>
-<form name="dangnhap" action="doDangnhap.jsp" method="post">
-    <table border="0">
-        <tr>
-            <td>Tên đăng nhập:</td>
-            <td><input type="text" name="username" id="username"
+<div class="container">
+<form name="dangnhap" action="doDangNhap.jsp" method="post">
 
-                       required /></td>
-        </tr>
-        <tr>
-            <td>Mật khẩu:</td>
-            <td><input type="password" name="password" id="password"
-                       required /></td>
+        <div class="form-group">
+            <label for="username">Tên đăng nhập:</label>
+            <input type="text" class="form-control" name="username" id="username" required/>
+        </div>
+        <div class="form-group">
+            <label for="password">Mật khẩu:</label>
+            <input type="password" class="form-control" name="password" id="password" required>
+        </div>
+    <br>
+        <input type="submit" class="btn btn-success" value="Đăng nhập" />
 
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Đăng nhập" /></td>
-        </tr>
-    </table>
 </form>
+</div>
 </body>
 </html>

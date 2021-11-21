@@ -6,6 +6,14 @@ public class DoAn {
 //    private long giaBan;
 
 
+    public DoAn(int id, String ten) {
+        this.id = id;
+        this.ten = ten;
+    }
+
+    public DoAn() {
+    }
+
     public int getId() {
         return id;
     }

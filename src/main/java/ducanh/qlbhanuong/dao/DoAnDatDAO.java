@@ -9,7 +9,7 @@ public class DoAnDatDAO extends DAO{
     public boolean luuDoAnDat(ArrayList<DoAnDat> list){
         int idHoaDon=new HoaDonDAO().getHoaDonID();
         boolean kq = false;
-        String sqlThem = "INSERT INTO tblDoAnDat(tblHoaDonId,tblDoAnId,giaMua,kichCo, soLuong) VALUES(?,?,?,?,?)";
+        String sqlThem = "INSERT INTO tblDoAnDat(tblHoaDonId,tblDoAnId,giaMua,kichCo, soLuong) VALUES(?,?,?,?,?);";
         try{
             this.con.setAutoCommit(false);
             for(DoAnDat doAnDat:list){
@@ -20,6 +20,7 @@ public class DoAnDatDAO extends DAO{
                 psThem.setString(4,doAnDat.getKichCo().getTen());
                 psThem.setInt(5,doAnDat.getSoLuong());
                 System.out.println(psThem);
+                psThem.executeUpdate();
             }
             this.con.commit();
             kq=true;
