@@ -54,7 +54,7 @@
 
         <tr>
             <td>Số lượng:</td>
-            <td><input  type="text" name="soLuong" id="soLuong" value="1" required /></td>
+            <td><input  type="number" name="soLuong" id="soLuong" value="1" min="1" max="100" required /></td>
         </tr>
         <tr>
             <td></td>

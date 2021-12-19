@@ -22,10 +22,12 @@
     if (session.getAttribute("listDoAnDat")!=null)
         listDoAnDat = (ArrayList<DoAnDat>) session.getAttribute("listDoAnDat");
 
-    int diem=0;
+    int diem=session.getAttribute("diem")==null?0: (int) session.getAttribute("diem");
+
     if(request.getParameter("diemDoi")!=null){
         diem=Integer.parseInt(request.getParameter("diemDoi"));
     }
+    session.setAttribute("diem",diem);
     int sl,kcID;
     if (request.getParameter("soLuong")!=null && request.getParameter("kichCo")!=null){
         sl=Integer.parseInt(request.getParameter("soLuong"));

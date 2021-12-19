@@ -54,13 +54,17 @@
         <tr><td>SDT: <%=khachHang.getSdt()%></td></tr>
         <tr><td >Điểm: <%=khachHang.getDiem()%></td></tr>
         <tr><td>Điểm đổi:</td>
-            <td><input type="text" name="diemDoi" id="diemDoi" value="<%=khachHang.getDiem()%>" required /></td>
+            <td><input type="number" name="diemDoi" id="diemDoi" min="1" max="<%=khachHang.getDiem()%>" value="<%=khachHang.getDiem()%>" required /></td>
         </tr>
         <tr>
             <td></td>
             <td><input class="btn btn-success" type="submit" value="Đổi điểm" /></td>
         </tr>
     </table>
+    <%}else{%>
+    <div class="alert alert-danger">
+        <strong>Mã khách hàng không đúng!</strong>
+    </div>
     <%}} %>
     <button type="button" class="btn btn-warning" onclick="document.location='gdHoaDon.jsp'">Quay lại</button>
 </form>

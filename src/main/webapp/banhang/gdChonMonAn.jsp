@@ -23,6 +23,7 @@
         listDoAn=doAnDAO.getDoAnByName(name);
 
         session.setAttribute("listTimKiem",listDoAn);
+        session.setAttribute("luuHD",false);
 
 %>
 
@@ -55,7 +56,7 @@
         </thead>
         <tbody>
         <%
-            if(listDoAn != null)
+//            if(listDoAn != null)
                 for(int i=0; i<listDoAn.size(); i++){
         %>
         <tr>
@@ -68,7 +69,11 @@
         <%} %>
         </tbody>
     </table>
-<%}%>
+<%} else if (request.getParameter("name")!=null){%>
+    <div class="alert alert-danger">
+        <strong>Không tìm thấy đồ ăn nào!</strong>
+    </div>
+    <%}%>
     <br>
 <button type="button" class="btn btn-warning" onclick="document.location='gdChinh.jsp'">Quay lại</button>
 </form>

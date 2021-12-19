@@ -19,7 +19,7 @@ public class TestHoaDonDAO extends DAO {
         NhanVien nhanVien=new NhanVien(1,"Nguyen duc anh","ha Noi","03458345","ducanh","123","nvbh");
         ArrayList<DoAnDat> list=new ArrayList<>();
         list.add(doAnDat);
-        HoaDon hoaDon=new HoaDon(1,nhanVien,khachHang,"15/11/2021","da thanh toan",list);
+        HoaDon hoaDon=new HoaDon(1,nhanVien,khachHang,"15/11/2021","da thanh toan",list,100);
 
         try{
             DAO.con.setAutoCommit(false);
@@ -47,7 +47,7 @@ public class TestHoaDonDAO extends DAO {
         ArrayList<DoAnDat> list=new ArrayList<>();
         list.add(doAnDat);
         list.add(doAnDat);
-        HoaDon hoaDon=new HoaDon(1,nhanVien,khachHang,"15/11/2021","da thanh toan",list);
+        HoaDon hoaDon=new HoaDon(1,nhanVien,khachHang,"15/11/2021","da thanh toan",list,1000);
 
         try{
             DAO.con.setAutoCommit(false);
@@ -74,7 +74,7 @@ public class TestHoaDonDAO extends DAO {
         ArrayList<DoAnDat> list=new ArrayList<>();
         list.add(doAnDat);
         list.add(doAnDat);
-        HoaDon hoaDon=new HoaDon(1,nhanVien,khachHang,"15/11/2021","da thanh toan",list);
+        HoaDon hoaDon=new HoaDon(1,nhanVien,khachHang,"15/11/2021","da thanh toan",list,1000);
 
         try{
             DAO.con.setAutoCommit(false);
@@ -101,7 +101,7 @@ public class TestHoaDonDAO extends DAO {
         ArrayList<DoAnDat> list=new ArrayList<>();
         list.add(doAnDat);
         list.add(doAnDat);
-        HoaDon hoaDon=new HoaDon(1,nhanVien,khachHang,"15/11/2021","da thanh toan",list);
+        HoaDon hoaDon=new HoaDon(1,nhanVien,khachHang,"15/11/2021","da thanh toan",list,1000);
 
         try{
             DAO.con.setAutoCommit(false);

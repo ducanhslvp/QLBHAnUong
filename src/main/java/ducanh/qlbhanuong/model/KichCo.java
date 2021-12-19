@@ -10,7 +10,6 @@ public class KichCo {
     }
 
     public KichCo() {
-
     }
 
     public int getId() {
@@ -20,7 +19,6 @@ public class KichCo {
     public void setId(int id) {
         this.id = id;
     }
-
     public String getTen() {
         return ten;
     }

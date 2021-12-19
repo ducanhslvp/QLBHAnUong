@@ -12,7 +12,7 @@ public class HoaDonDAO extends DAO{
     public boolean luuHoaDon(HoaDon hoaDon){
         boolean kq = false;
         String sqlNotKH = "INSERT INTO tblhoadon(tblNhanVienId,ngayTT,tinhtrang) VALUES(?,?,?)";
-        String sqlKH = "INSERT INTO tblhoadon(tblNhanVienId,ngayTT,tinhtrang,tblKhachHangId) VALUES(?,?,?,?)";
+        String sqlKH = "INSERT INTO tblhoadon(tblNhanVienId,ngayTT,tinhtrang,tblKhachHangId,diemDoi) VALUES(?,?,?,?,?)";
         String sqlThem="";
         if (hoaDon.getKhachHang()!=null)
             sqlThem=sqlKH;
@@ -23,7 +23,10 @@ public class HoaDonDAO extends DAO{
             psThem.setInt(1,hoaDon.getNhanVien().getId());
             psThem.setString(2,java.time.LocalDateTime.now()+"");
             psThem.setString(3, "da thanh toan");
-            if (hoaDon.getKhachHang()!=null) psThem.setInt(4,hoaDon.getKhachHang().getId());
+            if (hoaDon.getKhachHang()!=null) {
+                psThem.setInt(4,hoaDon.getKhachHang().getId());
+                psThem.setInt(5,hoaDon.getDiemDoi());
+            }
             System.out.println(psThem);
             psThem.executeUpdate();
 

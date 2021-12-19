@@ -3,8 +3,6 @@ package ducanh.qlbhanuong.model;
 public class DoAn {
     private int id;
     private String ten;
-//    private long giaBan;
-
 
     public DoAn(int id, String ten) {
         this.id = id;

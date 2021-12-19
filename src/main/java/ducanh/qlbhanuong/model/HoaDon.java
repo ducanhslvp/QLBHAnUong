@@ -1,7 +1,6 @@
 package ducanh.qlbhanuong.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HoaDon {
     private int id;
@@ -10,17 +9,19 @@ public class HoaDon {
     private String ngayTT;
     private String tinhTrang;
     private ArrayList<DoAnDat> listDoAnDat;
+    private int diemDoi;
 
     public HoaDon() {
     }
 
-    public HoaDon(int id, NhanVien nhanVien, KhachHang khachHang, String ngayTT, String tinhTrang, ArrayList<DoAnDat> listDoAnDat) {
+    public HoaDon(int id, NhanVien nhanVien, KhachHang khachHang, String ngayTT, String tinhTrang, ArrayList<DoAnDat> listDoAnDat, int diemDoi) {
         this.id = id;
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
         this.ngayTT = ngayTT;
         this.tinhTrang = tinhTrang;
         this.listDoAnDat = listDoAnDat;
+        this.diemDoi = diemDoi;
     }
 
     public int getId() {
@@ -69,5 +70,13 @@ public class HoaDon {
 
     public void setListDoAnDat(ArrayList<DoAnDat> listDoAnDat) {
         this.listDoAnDat = listDoAnDat;
+    }
+
+    public int getDiemDoi() {
+        return diemDoi;
+    }
+
+    public void setDiemDoi(int diemDoi) {
+        this.diemDoi = diemDoi;
     }
 }

@@ -13,10 +13,12 @@
 <%
     if(request.getParameter("err") !=null &&
             request.getParameter("err").equalsIgnoreCase("timeout")){
-%> <h4>Hết phiên làm việc. Làm ơn đăng nhập lại!</h4><%
+%> <div class="alert alert-danger">
+    <strong>Hết phiên làm việc. Vui lòng đăng nhập lại!</strong></div><%
 }else if(request.getParameter("err") !=null &&
         request.getParameter("err").equalsIgnoreCase("fail")){
-%> <h4 color="red">Sai tên đăng nhập/mật khẩu!</h4><%
+%> <div class="alert alert-danger">
+    <strong>Sai tên đăng nhập hoặc mật khẩu!</strong></div><%
     }
 %>
 <h2> Đăng nhập </h2>
