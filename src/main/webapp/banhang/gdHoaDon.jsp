@@ -11,13 +11,13 @@
     <%@include file ="../header.jsp" %>
 </head>
 <%
-    //lay id sinh vien
+    //lay id nhan vien
     NhanVien nv = (NhanVien) session.getAttribute("nvbh");
     if(nv==null){
         response.sendRedirect("../gdDangNhap.jsp?err=timeout");
     }
 
-    ArrayList<DoAnDat> listDoAnDat=new ArrayList<>();
+    ArrayList<DoAnDat> listDoAnDat=null;
 
     if (session.getAttribute("listDoAnDat")!=null)
         listDoAnDat = (ArrayList<DoAnDat>) session.getAttribute("listDoAnDat");
@@ -44,6 +44,7 @@
             DoAn doAn= (DoAn) session.getAttribute("doAn");
             doAnDat.setDoAn((DoAn) session.getAttribute("doAn"));
             doAnDat.setSoLuong(sl);
+            System.out.println(doAn.getId()+" "+kcID);
             doAnDat.setKichCo(kichCoDoAnDAO.getKichCoDA(doAn.getId(),kcID).getKichCo());
             doAnDat.setGiaMua(kichCoDoAnDAO.getKichCoDA(doAn.getId(),kcID).getGia());
         }
@@ -51,18 +52,17 @@
 
     }
     //xoa list do an dat
-    if (request.getParameter("delete")!=null){
+    if (request.getParameter("delete")!=null && !listDoAnDat.isEmpty()){
         int vt =Integer.parseInt(request.getParameter("delete"));
         listDoAnDat.remove(vt);
         session.setAttribute("listDoAnDat",listDoAnDat);
         response.sendRedirect("gdHoaDon.jsp");
     }
-
     int tongTien=0-diem;
 %>
 <body>
 <h2> DANH SÁCH ĐỒ ĂN ĐÃ CHỌN </h2>
-
+<% if(!listDoAnDat.isEmpty()){%>
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -71,12 +71,12 @@
         <th >Giá</th>
         <th >Kích cỡ</th>
         <th >Số lượng</th>
+        <th >Thành tiền</th>
         <th >Thao tác</th>
     </tr>
     </thead>
     <tbody>
     <%
-        if(listDoAnDat != null)
             for(int i=0; i<listDoAnDat.size(); i++){
                 tongTien+=listDoAnDat.get(i).getGiaMua()*listDoAnDat.get(i).getSoLuong();
     %>
@@ -86,8 +86,10 @@
         <td style="padding:0 15px 0 15px;"><%=listDoAnDat.get(i).getGiaMua() %></td>
         <td style="padding:0 15px 0 15px;"><%=listDoAnDat.get(i).getKichCo().getTen() %></td>
         <td style="padding:0 15px 0 15px;"><%=listDoAnDat.get(i).getSoLuong() %></td>
+        <td style="padding:0 15px 0 15px;"><%=listDoAnDat.get(i).getSoLuong()*listDoAnDat.get(i).getGiaMua() %></td>
         <td style="text-align:center; padding:0 15px 0 15px;">
             <a class="btn btn-danger" href="gdHoaDon.jsp?delete=<%=i%>">Xóa</a>
+            <a class="btn btn-primary" href="gdSua.jsp?id=<%=i%>">Sửa</a>
         </td>
     </tr>
     <%} %>
@@ -95,10 +97,18 @@
 </table>
 
 <%if (diem>0){%>
-    <h4>Điểm đã đổi: <%=diem%></h4>
-<%}%>
+    <h5>Thành tiền: <%=diem+tongTien%> VND</h5>
+    <h5>Đổi điểm: -<%=diem%> VND</h5>
+<%}
+    session.setAttribute("tongTien",tongTien);
+%>
 <h4>Tổng tiền: <%=tongTien%> VND</h4>
 <br>
+<%}else{%>
+    <div class="alert alert-danger">
+    <strong>Danh sách trống</strong></div>
+<%}%>
+
 <button class="btn btn-primary" onclick="document.location='gdChonMonAn.jsp'">Thêm đồ ăn</button>
 <button class="btn btn-warning" onclick="document.location='gdChinh.jsp'">Trang chủ</button>
 <%if (listDoAnDat.size()>0){%>

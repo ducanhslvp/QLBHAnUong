@@ -12,7 +12,7 @@
     <%@include file ="../header.jsp" %>
 </head>
 <%
-    //lay id sinh vien
+    //lay id nhan vien
     NhanVien sv = (NhanVien) session.getAttribute("nvbh");
     if(sv==null){
         response.sendRedirect("../gdDangNhap.jsp?err=timeout");
@@ -44,7 +44,9 @@
         <td><select class="form-control" name="kichCo" size=1 >
 <%--            <option value="1" selected>--Chon kich co--</option>--%>
             <option value="<%=listKichCo.get(0).getKichCo().getId()%>" selected><%=listKichCo.get(0).getKichCo().getTen()%></option>
-            <% for(int i=1;i<listKichCo.size();i++){%>
+            <% for(int i=1;i<listKichCo.size();i++){
+                System.out.println(listKichCo.get(i).getKichCo().getId());
+            %>
             <option value="<%=listKichCo.get(i).getKichCo().getId()%>">
                 <%=listKichCo.get(i).getKichCo().getTen() %></option>
             <%}

@@ -12,6 +12,7 @@ public class DAO {
             try {
                 Class.forName(dbClass);
                 con = DriverManager.getConnection(dbUrl, "root", "123456");
+                con.setAutoCommit(false);
             } catch (Exception e) {
                 e.printStackTrace();
             }

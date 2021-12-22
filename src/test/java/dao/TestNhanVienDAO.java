@@ -9,34 +9,54 @@ public class TestNhanVienDAO {
     NhanVienDAO nhanVienDAO=new NhanVienDAO();
 
     @Test
-    public void TestDN1() {
+    public void TestDNKhongTonTai() {
         String username = "aaa";
         String password = "a";
         NhanVien nhanVien1 = new NhanVien();
         nhanVien1.setUsername(username);
         nhanVien1.setPassword(password);
-        Boolean kq = nhanVienDAO.kiemtraDangnhap(nhanVien1);
-        Assert.assertTrue(kq);
+        boolean kq = nhanVienDAO.kiemtraDangnhap(nhanVien1);
+        Assert.assertFalse(kq);
     }
 
     @Test
-    public void TestDN2() {
-        String username = "aaa";
-        String password = "aaa";
+    public void TestDNTKiTuDacBiet() {
+        String username = "$%#$%#";
+        String password = "@#%$@$";
         NhanVien nhanVien1 = new NhanVien();
         nhanVien1.setUsername(username);
         nhanVien1.setPassword(password);
-        Boolean kq = nhanVienDAO.kiemtraDangnhap(nhanVien1);
-        Assert.assertTrue(kq);
+        boolean kq = nhanVienDAO.kiemtraDangnhap(nhanVien1);
+        Assert.assertFalse(kq);
     }
     @Test
-    public void TestDN3() {
+    public void TestDNRong() {
         String username = "";
         String password = "";
         NhanVien nhanVien1 = new NhanVien();
         nhanVien1.setUsername(username);
         nhanVien1.setPassword(password);
-        Boolean kq = nhanVienDAO.kiemtraDangnhap(nhanVien1);
+        boolean kq = nhanVienDAO.kiemtraDangnhap(nhanVien1);
+        Assert.assertFalse(kq);
+    }
+    @Test
+    public void TestDNTonTai() {
+        String username = "a";
+        String password = "a";
+        NhanVien nhanVien1 = new NhanVien();
+        nhanVien1.setUsername(username);
+        nhanVien1.setPassword(password);
+        boolean kq = nhanVienDAO.kiemtraDangnhap(nhanVien1);
         Assert.assertTrue(kq);
+    }
+    @Test
+    public void TestDNTenQuaDai() {
+        String username = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        String password = "";
+        NhanVien nhanVien1 = new NhanVien();
+        nhanVien1.setUsername(username);
+        nhanVien1.setPassword(password);
+        boolean kq = nhanVienDAO.kiemtraDangnhap(nhanVien1);
+        Assert.assertFalse(kq);
     }
 }

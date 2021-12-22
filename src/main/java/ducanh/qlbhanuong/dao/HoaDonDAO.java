@@ -5,6 +5,7 @@ import ducanh.qlbhanuong.model.HoaDon;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 public class HoaDonDAO extends DAO{
     public HoaDonDAO() {
@@ -21,7 +22,7 @@ public class HoaDonDAO extends DAO{
             this.con.setAutoCommit(false);
             PreparedStatement psThem = con.prepareStatement(sqlThem);
             psThem.setInt(1,hoaDon.getNhanVien().getId());
-            psThem.setString(2,java.time.LocalDateTime.now()+"");
+            psThem.setString(2,java.time.LocalDate.now()+"");
             psThem.setString(3, "da thanh toan");
             if (hoaDon.getKhachHang()!=null) {
                 psThem.setInt(4,hoaDon.getKhachHang().getId());
@@ -30,11 +31,11 @@ public class HoaDonDAO extends DAO{
             System.out.println(psThem);
             psThem.executeUpdate();
 
-            this.con.commit();
+//            this.con.commit();
             kq=true;
         }catch(Exception e){
             try{
-                this.con.rollback();
+//                this.con.rollback();
             }catch(Exception ex){
                 kq=false;
                 ex.printStackTrace();
@@ -43,7 +44,7 @@ public class HoaDonDAO extends DAO{
             e.printStackTrace();
         }finally{
             try{
-                this.con.setAutoCommit(true);
+//                this.con.setAutoCommit(true);
             }catch(Exception ex){
                 kq=false;
                 ex.printStackTrace();

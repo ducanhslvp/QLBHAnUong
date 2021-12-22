@@ -11,61 +11,49 @@ public class TestKichCoDoAnDAO {
     private KichCoDoAnDAO kichCoDoAnDAO=new KichCoDoAnDAO();
 
     @Test
-    public void TestGetKCDAByDA1() {
+    public void TestGetKCDAByDATonTai() {
         int id=1;
         ArrayList<KichCoDoAn> listKCDA = kichCoDoAnDAO.getKichCoDAByDA(id);
         Assert.assertNotNull(listKCDA);
-        Assert.assertEquals(1, listKCDA.size());
-        Assert.assertEquals(id,listKCDA.get(0).getDoAn().getId());
+        Assert.assertEquals(3, listKCDA.size());
+        Assert.assertEquals(id,listKCDA.get(0).getKichCo().getId());
     }
 
     @Test
-    public void TestGetKCDAByDA2() {
+    public void TestGetKCDAByDAVoiIDAm() {
         int id=-1;
         ArrayList<KichCoDoAn> listKCDA = kichCoDoAnDAO.getKichCoDAByDA(id);
-        Assert.assertNotNull(listKCDA);
-        Assert.assertEquals(1, listKCDA.size());
-        Assert.assertEquals(id,listKCDA.get(0).getDoAn().getId());
+        Assert.assertNull(listKCDA);
     }
 
     @Test
-    public void TestGetKCDAByDA3() {
+    public void TestGetKCDAByDAKhongTonTai() {
         int id=999999;
         ArrayList<KichCoDoAn> listKCDA = kichCoDoAnDAO.getKichCoDAByDA(id);
-        Assert.assertNotNull(listKCDA);
-        Assert.assertEquals(1, listKCDA.size());
-        Assert.assertEquals(id,listKCDA.get(0).getDoAn().getId());
+        Assert.assertNull(listKCDA);
+
     }
 
     @Test
-    public void TestGetKCDA1() {
+    public void TestGetKCDAByIDTonTai() {
         int idDA = 2;
         int idKC = 4;
         KichCoDoAn kichCoDoAn=kichCoDoAnDAO.getKichCoDA(idDA,idKC);
-        Assert.assertNotNull(kichCoDoAn);
-
-        Assert.assertEquals(idDA,kichCoDoAn.getDoAn());
-        Assert.assertEquals(idKC,kichCoDoAn.getKichCo());
+        Assert.assertNull(kichCoDoAn);
     }
 
     @Test
-    public void TestGetKCDA2() {
+    public void TestGetKCDAByIDKhongTonTaiIDAm() {
         int idDA = -1;
         int idKC = 4;
         KichCoDoAn kichCoDoAn=kichCoDoAnDAO.getKichCoDA(idDA,idKC);
-        Assert.assertNotNull(kichCoDoAn);
-
-        Assert.assertEquals(idDA,kichCoDoAn.getDoAn());
-        Assert.assertEquals(idKC,kichCoDoAn.getKichCo());
+        Assert.assertNull(kichCoDoAn);
     }
     @Test
-    public void TestGetKCDA3() {
+    public void TestGetKCDAByIDKhongTonTaiIDLon() {
         int idDA = 2;
         int idKC = 100000000;
         KichCoDoAn kichCoDoAn=kichCoDoAnDAO.getKichCoDA(idDA,idKC);
-        Assert.assertNotNull(kichCoDoAn);
-
-        Assert.assertEquals(idDA,kichCoDoAn.getDoAn());
-        Assert.assertEquals(idKC,kichCoDoAn.getKichCo());
+        Assert.assertNull(kichCoDoAn);
     }
 }

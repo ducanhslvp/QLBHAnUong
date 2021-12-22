@@ -31,6 +31,7 @@ public class DoAnDAO extends DAO{
 //        return kq;
 //    }
     public ArrayList<DoAn> getDoAnByName(String ten){
+        if (ten.equals(" ") || ten.equals("%") || ten.equals("")) return null;
         ArrayList<DoAn> kq=null;
         String sql = "SELECT * FROM tbldoan WHERE ten LIKE ?";
         try{
@@ -60,11 +61,11 @@ public class DoAnDAO extends DAO{
             CallableStatement cs = con.prepareCall(sql);
             cs.setString(1,id+"");
             ResultSet rs = cs.executeQuery();
-            while(rs.next()){
-
+            if(rs.next()){
                 doAn.setId(rs.getInt("id"));
                 doAn.setTen(rs.getString("ten"));
             }
+            else return null;
         }catch(Exception e){
             e.printStackTrace();
 

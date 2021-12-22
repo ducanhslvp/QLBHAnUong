@@ -11,6 +11,7 @@ public class KhachHangDAO extends DAO{
     public KhachHangDAO() {
     }
     public KhachHang getKhachHangByMaTV(String ma){
+        if (ma.equals("") ||ma.equals(" ")) return null;
         KhachHang khachHang=new KhachHang();
         String sql = "select * from tblkhachhang where mathanhvien = ?";
         try{
@@ -25,6 +26,7 @@ public class KhachHangDAO extends DAO{
                 khachHang.setSdt(rs.getString("sdt"));
                 khachHang.setDiem(rs.getInt("diem"));
             }
+            else return null;
         }catch(Exception e){
             e.printStackTrace();
         }

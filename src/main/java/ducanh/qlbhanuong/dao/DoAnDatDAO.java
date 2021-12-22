@@ -13,20 +13,21 @@ public class DoAnDatDAO extends DAO{
         try{
             this.con.setAutoCommit(false);
             for(DoAnDat doAnDat:list){
+                if (doAnDat.getDoAn().getId()<1) return false;
                 PreparedStatement psThem = con.prepareStatement(sqlThem);
                 psThem.setInt(1,idHoaDon);
                 psThem.setInt(2,doAnDat.getDoAn().getId());
                 psThem.setLong(3,doAnDat.getGiaMua());
-                psThem.setString(4,doAnDat.getKichCo().getTen());
+                psThem.setString(4,doAnDat.getKichCo().getId()+"");
                 psThem.setInt(5,doAnDat.getSoLuong());
                 System.out.println(psThem);
                 psThem.executeUpdate();
             }
-            this.con.commit();
+//            this.con.commit();
             kq=true;
         }catch(Exception e){
             try{
-                this.con.rollback();
+//                this.con.rollback();
             }catch(Exception ex){
                 kq=false;
                 ex.printStackTrace();
@@ -35,7 +36,7 @@ public class DoAnDatDAO extends DAO{
             e.printStackTrace();
         }finally{
             try{
-                this.con.setAutoCommit(true);
+//                this.con.setAutoCommit(true);
             }catch(Exception ex){
                 kq=false;
                 ex.printStackTrace();

@@ -7,8 +7,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class KichCoDAO extends DAO{
-    public KichCoDAO() {
+public class KichCoDAO1 extends DAO{
+    public KichCoDAO1() {
         super();
     }
     public ArrayList<KichCo> getKichCoByDA(int id){

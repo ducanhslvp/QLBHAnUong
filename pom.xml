@@ -53,6 +53,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.0.0-alpha-1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

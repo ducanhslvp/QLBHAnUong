@@ -33,7 +33,7 @@ public class KichCoDoAnDAO extends DAO{
         return kq;
     }
     public KichCoDoAn getKichCoDA(int doAnID,int kichCoID){
-        KichCoDoAn kichCoDoAn=new KichCoDoAn();
+        KichCoDoAn kichCoDoAn=null;
         String sql = "SELECT * FROM tblkichcodoan,tblKichCo where tblKichCoDoAn.tblKichCoId=tblkichco.id and " +
                 "tblkichcodoan.tblDoAnId=? and tblkichcodoan.tblKichCoid=?";
         try{

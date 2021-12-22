@@ -11,19 +11,20 @@
     <%@include file ="../header.jsp" %>
 </head>
 <%
-//lay id sinh vien
+//lay id nhan vien
         NhanVien sv = (NhanVien) session.getAttribute("nvbh");
         if(sv==null){
             response.sendRedirect("../gdDangNhap.jsp?err=timeout");
         }
+        ArrayList<DoAn> listDoAn=null;
+        if (request.getParameter("name")!=null){
+            String name =request.getParameter("name");
+            DoAnDAO doAnDAO=new DoAnDAO();
+            listDoAn=doAnDAO.getDoAnByName(name);
+            session.setAttribute("listTimKiem",listDoAn);
+        }
 
-        String name = (String)request.getParameter("name");
-        DoAnDAO doAnDAO=new DoAnDAO();
-        ArrayList<DoAn> listDoAn=new ArrayList<>();
-        listDoAn=doAnDAO.getDoAnByName(name);
-
-        session.setAttribute("listTimKiem",listDoAn);
-        session.setAttribute("luuHD",false);
+//        session.setAttribute("luuHD",false);
 
 %>
 
@@ -35,7 +36,7 @@
     <table border="0">
         <tr>
             <td>Tên món ăn:</td>
-            <td><input type="text" name="name" id="name" required /></td>
+            <td><input type="text" name="name" id="name" required/></td>
         </tr>
         <tr>
             <td></td>
