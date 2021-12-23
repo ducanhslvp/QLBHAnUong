@@ -44,9 +44,9 @@
     KhachHangDAO khachHangDAO=new KhachHangDAO();
 //   luu hoa don va do an dat
     boolean tinhTrang=false;
-//    if (session.getAttribute("luuHD")!=null) tinhTrang=(boolean) session.getAttribute("luuHD");
 
     if (!list.isEmpty()){
+//        DAO.con.setAutoCommit(false);
         if(hoaDonDAO.luuHoaDon(hoaDon)){
             if (doAnDatDAO.luuDoAnDat(list)){
                 if (khachHang!=null){
@@ -58,9 +58,6 @@
                         session.removeAttribute("tongTien");
                         session.removeAttribute("listDoAnDat");
 %>
-                <%--    <script type="text/javascript">--%>
-                <%--        alert("Thanh toán thành công!");--%>
-                <%--    </script>--%>
 
                         <script>
                             window.alert("Thanh toán thành công!");
@@ -71,7 +68,11 @@
         <%
 
 //    response.sendRedirect("gdChinh.jsp");
-    }}}}}else{
+    }}}}else {
+//            DAO.con.rollback();
+//            DAO.con.setAutoCommit(true);
+    }
+    }else{
 %>
     <script type="text/javascript">
         alert("Thanh toán thất bại!");

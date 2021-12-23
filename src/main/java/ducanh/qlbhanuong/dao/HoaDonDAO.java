@@ -12,6 +12,8 @@ public class HoaDonDAO extends DAO{
     }
     public boolean luuHoaDon(HoaDon hoaDon){
         boolean kq = false;
+//        if (hoaDon.getListDoAnDat()==null || hoaDon.getNhanVien()==null) return false;
+        if (hoaDon.getNhanVien()==null) return false;
         String sqlNotKH = "INSERT INTO tblhoadon(tblNhanVienId,ngayTT,tinhtrang) VALUES(?,?,?)";
         String sqlKH = "INSERT INTO tblhoadon(tblNhanVienId,ngayTT,tinhtrang,tblKhachHangId,diemDoi) VALUES(?,?,?,?,?)";
         String sqlThem="";

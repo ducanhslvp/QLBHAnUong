@@ -120,10 +120,9 @@ public class TestLuuHoaDon extends DAO {
         //xoa do an
         driver.findElement(By.cssSelector("a.btn")).click();
         String tb=driver.findElement(By.cssSelector("strong")).getText();
-        Assert.assertEquals(tb,"Danh sách rỗng");
+        Assert.assertEquals(tb,"Danh sách trống");
 
     }
-
 
 
     @Before

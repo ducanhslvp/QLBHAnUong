@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class DoAnDatDAO extends DAO{
     public boolean luuDoAnDat(ArrayList<DoAnDat> list){
         int idHoaDon=new HoaDonDAO().getHoaDonID();
+        if (list==null) return false;
         boolean kq = false;
         String sqlThem = "INSERT INTO tblDoAnDat(tblHoaDonId,tblDoAnId,giaMua,kichCo, soLuong) VALUES(?,?,?,?,?);";
         try{

@@ -38,7 +38,8 @@ public class TestKhachHangDAO {
     }
     @Test
     public void TestGetKHbyMaVoiMaRatLon(){
-        String ma="9999999999999999999999999999999999999999999999999999999999";
+        String ma="9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "999999999999999999999999999";
         KhachHang khachHang=khachHangDAO.getKhachHangByMaTV(ma);
         Assert.assertNull(khachHang);
     }

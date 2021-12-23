@@ -3,7 +3,7 @@ package ducanh.qlbhanuong;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Test {
+public class Fix {
     public static void main(String[] args) {
 
         //        String name="a";

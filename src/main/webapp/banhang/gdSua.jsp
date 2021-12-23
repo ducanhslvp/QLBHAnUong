@@ -85,7 +85,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input class="btn btn-success" type="submit" value="Sua" /></td>
+            <td><input class="btn btn-success" type="submit" value="Sửa" /></td>
         </tr>
     </table>
 </form>
